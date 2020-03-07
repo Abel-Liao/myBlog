@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Loadable from "@loadable/component";
 
 const Index = Loadable(() => import("./component/index"));
