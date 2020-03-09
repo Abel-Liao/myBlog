@@ -5,12 +5,17 @@ import "./css/index.less";
 
 import loginImg from "./img/18051.jpg";
 
-class Login extends React.Component {
-  constructor(props) {
+interface UserInfo {
+  userName: string;
+  password: string;
+  props: string;
+}
+class Login extends React.Component<UserInfo> {
+  constructor(props: Readonly<UserInfo>) {
     super(props);
-    this.state = { name: "Eble" };
+    this.state = { userName: "", password: "" };
   }
-  render() {
+  render(): JSX.Element {
     return (
       <div className="myBlog-login">
         <h1 className="text-center">{this.props.login.counter}</h1>
@@ -33,10 +38,12 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   return state;
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (
+  dispatch: (arg0: { type: string; amount: number }) => void
+) => {
   return {
     increment: () => {
       setTimeout(() => {

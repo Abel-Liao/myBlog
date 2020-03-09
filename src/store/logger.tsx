@@ -5,7 +5,9 @@ import Raven from "raven-js";
 /**
  * Logs all actions and states after they are dispatched.
  */
-const logger = store => next => action => {
+const logger = (store: { getState: () => any }) => (
+  next: (arg0: any) => any
+) => (action: any) => {
   console.log("dispatching", action);
   let result = next(action);
   console.log(result);
@@ -16,7 +18,9 @@ const logger = store => next => action => {
 /**
  * Sends crash reports as state is updated and listeners are notified.
  */
-const crashReporter = store => next => action => {
+const crashReporter = (store: { getState: () => any }) => (
+  next: (arg0: any) => any
+) => (action: any) => {
   try {
     return next(action);
   } catch (err) {

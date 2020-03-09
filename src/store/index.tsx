@@ -1,13 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { routerReducer } from "react-router-redux";
 
 import { logger, crashReporter } from "./logger";
 import login from "./login";
 import register from "./register";
 
+// Add the reducer to your store on the `routing` key
 const combineStore = combineReducers<any>({
   login,
-  register
+  register,
+  routing: routerReducer
 });
 const store = createStore(
   combineStore,

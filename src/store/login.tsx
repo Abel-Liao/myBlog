@@ -8,7 +8,7 @@ const { increment, decrement } = createActions({
 });
 const login = handleActions(
   {
-    [combineActions(increment, decrement)]: (state, actions) => {
+    [combineActions(increment, decrement)]: (state: any, actions: any) => {
       console.log(actions);
       return { ...state, counter: state.counter + actions.amount };
     }
