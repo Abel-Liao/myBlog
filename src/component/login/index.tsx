@@ -39,7 +39,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     increment: () => {
-      dispatch({ type: "INCREMENT", amount: 10 });
+      setTimeout(() => {
+        dispatch({ type: "INCREMENT", amount: 10 });
+      }, 1000);
     },
     decrement: () => {
       dispatch(decrement(3));
