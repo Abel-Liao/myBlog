@@ -1,7 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const NODE_ENV = process.env.NODE_ENV;
 module.exports = {
   entry: "./src/index.tsx",
   output: {
@@ -19,10 +18,7 @@ module.exports = {
         test: /\.(jsx|js|ts|tsx)$/,
         exclude: /(node_modules)/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"]
-          }
+          loader: "babel-loader"
         }
       },
       {
