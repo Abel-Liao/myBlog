@@ -1,0 +1,58 @@
+@placeholder: #eee;
+// 所有背景色用rgba格式
+// 所有有hover状态的元素的背景色,初始为0.8,hover状态时为1
+html,
+body,
+div,
+p,
+button,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li,
+ol {
+  outline: none;
+  list-style: none;
+}
+button,
+input {
+  outline: none;
+  background: none;
+}
+button {
+  border: none;
+}
+::-webkit-input-placeholder {
+  color: @placeholder;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: @placeholder;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: @placeholder;
+}
+:-ms-input-placeholder {
+  color: @placeholder;
+}
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+}
+html * {
+  box-sizing: border-box;
+}
+html {
+  font-size: 13px;
+  color: #fff;
+}

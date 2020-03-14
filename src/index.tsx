@@ -10,6 +10,8 @@ import { Provider } from "react-redux";
 
 import Store from "./store";
 
+import "./style/index.less";
+
 const history: any = syncHistoryWithStore(createBrowserHistory(), Store);
 
 const Loading = () => <div>loading...</div>;

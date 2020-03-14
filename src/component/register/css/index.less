@@ -1,5 +1,123 @@
+@blackColor: rgba(0, 0, 0, 0.3); //全局背景色
+@red: rgba(229, 26, 72, 0.8); //按钮背景色
+@redHover: rgba(229, 26, 72, 1); //按钮Hover背景色
+@thirty: 30px;
+@five: 5px;
+@twoHundred: 280px;
+@colorFFF: #fff;
+
 .myBlog-register {
-  background-color: #f00;
-  background-image: url("../img/18123.jpg");
-  color: #ff0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-image: url("../../../style/images/loginBg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.myBlog-register-content {
+  padding: @thirty;
+  background-color: @blackColor;
+  border-radius: 10px;
+}
+.myBlog-register-form {
+  margin: 5px 0 20px;
+  label {
+    display: block;
+    width: @twoHundred;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  input {
+    display: inline-block;
+    color: @colorFFF;
+    width: 100%;
+    height: @thirty;
+    line-height: @thirty;
+    padding: 0 10px;
+    border-radius: @five;
+  }
+  .myBlog-register-button {
+    cursor: pointer;
+    background-color: @red;
+    border: none;
+    &:hover {
+      background-color: @redHover;
+    }
+  }
+}
+.register-clear-text {
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  line-height: 12px;
+  background: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.myBlog-register-dynamic {
+  text-align: left;
+  input {
+    width: 50%;
+  }
+  .register-clear-text {
+    right: 130px;
+    text-align: center;
+  }
+}
+.myBlog-dynamic-text {
+  cursor: pointer;
+  float: right;
+  width: 40%;
+  text-align: center;
+  height: @thirty;
+  line-height: @thirty;
+  background-color: @red;
+  border-radius: @five;
+  &:hover {
+    background-color: @redHover;
+  }
+}
+.myBlog-register-ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.myBlog-register-li {
+  height: @thirty;
+  line-height: @thirty;
+  width: 50%;
+  background-color: @blackColor;
+  cursor: pointer;
+  &:first-child {
+    border-radius: @five 0 0 @five;
+    border-right: 1px solid @blackColor;
+  }
+  &:last-child {
+    border-radius: 0 @five @five 0;
+  }
+  &.register-choose,
+  &:hover {
+    background: @redHover;
+  }
+}
+.myBlog-register-bottom {
+  a {
+    color: @colorFFF;
+    &:hover {
+      color: @red;
+    }
+  }
+}
+.error-text {
+  color: @red;
+  text-align: left;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
 }

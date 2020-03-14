@@ -59,7 +59,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jp?g|gif|svg)$/,
+        test: /\.(png|jp?g|gif|svg|jfif)$/,
         use: [
           {
             loader: "url-loader",
