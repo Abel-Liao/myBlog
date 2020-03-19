@@ -15,7 +15,7 @@ const Login: FunctionComponent = (props: any) => {
   /**
    * 登录方式列表
    */
-  const chooseList: object = [
+  const chooseList: object[] = [
     {
       name: "userName",
       text: "密码登录"
@@ -59,16 +59,13 @@ const Login: FunctionComponent = (props: any) => {
   /**
    * input value绑定
    */
-  const infoFun = useCallback(
-    enent => {
-      const { name, value }: any = event.target;
-      setUserInfo({
-        ...userInfo,
-        [name]: value
-      });
-    },
-    [userInfo]
-  );
+  const infoFun = useCallback(() => {
+    const { name, value }: any = event.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value
+    });
+  }, [userInfo]);
   /**
    *
    * 清空数据
@@ -85,7 +82,7 @@ const Login: FunctionComponent = (props: any) => {
    * 登录按钮触发事件
    */
   const loginFun = () => {
-    const errorText = {
+    const errorText: any = {
       userName: "用户名不能为空",
       password: "密码不能为空",
       dynamic: "动态码不能为空"
@@ -97,20 +94,21 @@ const Login: FunctionComponent = (props: any) => {
         } else if (types === "dynamic" && key === "password") {
           break;
         }
-        setIsError(isError => true);
-        setErrorText(isError => errorText[key]);
+        setIsError(true);
+        setErrorText(errorText[key]);
         return;
       } else {
-        setIsError(isError => false);
+        setIsError(false);
       }
     }
-    console.log(types);
+    window.sessionStorage.setItem("isLogin", "true");
+    props.history.push("/");
   };
   return (
     <div className="myBlog-login">
       <div className="myBlog-login-content">
         <ul className="myBlog-login-ul">
-          {chooseList.map(item => {
+          {chooseList.map((item: any) => {
             return (
               <li
                 className={`myBlog-login-li ${
@@ -144,7 +142,9 @@ const Login: FunctionComponent = (props: any) => {
               >
                 x
               </span>
-            ) : null}
+            ) : (
+              undefined
+            )}
           </label>
           {types === "userName" ? (
             <UserNamePage

@@ -35,7 +35,10 @@ const DynamicPage: FunctionComponent = (props: any) => {
         placeholder="请输入动态密码"
         onChange={props.infoFun}
       />
-      <span className="myBlog-dynamic-text" onClick={isText ? isTextFun : null}>
+      <span
+        className="myBlog-dynamic-text"
+        onClick={isText ? isTextFun : undefined}
+      >
         {isText ? "获取动态密码" : countdown}
       </span>
       {dynamic ? (
@@ -45,7 +48,9 @@ const DynamicPage: FunctionComponent = (props: any) => {
         >
           x
         </span>
-      ) : null}
+      ) : (
+        undefined
+      )}
     </label>
   );
 };

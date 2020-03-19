@@ -33,7 +33,7 @@ const Register: FunctionComponent = (props: any) => {
   /**
    * 用户信息列表文字
    */
-  const userInfoText: object = {
+  const userInfoText: any = {
     userName: "用户名",
     password: "用户密码",
     confirm: "确认密码",
@@ -159,7 +159,9 @@ const Register: FunctionComponent = (props: any) => {
                   >
                     x
                   </span>
-                ) : null}
+                ) : (
+                  undefined
+                )}
                 <p className="error-text">
                   {isError[item] ? errorText[item] : ""}
                 </p>
