@@ -13,7 +13,7 @@ const animation: any = {
   Book: Book,
   Tree: Tree,
   Road: Road,
-  Galaxy: Galaxy
+  Galaxy: Galaxy,
 };
 
 function Index(props: any) {
@@ -27,7 +27,7 @@ function Index(props: any) {
         <div className="myBlog-index-choose">
           <span>{current}</span>
           <ul className="index-choose-ul">
-            {animationList.map(animation => {
+            {animationList.map((animation) => {
               return (
                 <li
                   className={`index-choose-li ${animation} ${

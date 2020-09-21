@@ -2,7 +2,7 @@ import React, {
   useState,
   useEffect,
   FunctionComponent,
-  useCallback
+  useCallback,
 } from "react";
 import { Link } from "react-router-dom";
 import regex from "../../helper/regex";
@@ -18,12 +18,12 @@ const Login: FunctionComponent = (props: any) => {
   const chooseList: object[] = [
     {
       name: "userName",
-      text: "密码登录"
+      text: "密码登录",
     },
     {
       name: "dynamic",
-      text: "动态码登录"
-    }
+      text: "动态码登录",
+    },
   ];
   /**
    * 当前登录方式
@@ -36,7 +36,7 @@ const Login: FunctionComponent = (props: any) => {
     userName: "",
     password: "",
     dynamic: "",
-    types: types
+    types: types,
   });
   /**
    * 切换登录方式
@@ -63,7 +63,7 @@ const Login: FunctionComponent = (props: any) => {
     const { name, value }: any = event.target;
     setUserInfo({
       ...userInfo,
-      [name]: value
+      [name]: value,
     });
   }, [userInfo]);
   /**
@@ -72,10 +72,9 @@ const Login: FunctionComponent = (props: any) => {
    * @param name {string}
    */
   const clearTextFun = (name: string) => {
-    console.log(name);
     setUserInfo({
       ...userInfo,
-      [name]: ""
+      [name]: "",
     });
   };
   /**
@@ -85,7 +84,7 @@ const Login: FunctionComponent = (props: any) => {
     const errorText: any = {
       userName: "用户名不能为空",
       password: "密码不能为空",
-      dynamic: "动态码不能为空"
+      dynamic: "动态码不能为空",
     };
     for (let key in userInfo) {
       if (!userInfo[key]) {
@@ -142,9 +141,7 @@ const Login: FunctionComponent = (props: any) => {
               >
                 x
               </span>
-            ) : (
-              undefined
-            )}
+            ) : undefined}
           </label>
           {types === "userName" ? (
             <UserNamePage
