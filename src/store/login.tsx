@@ -1,19 +1,16 @@
 import { createActions, handleActions, combineActions } from "redux-actions";
 
-const defaultState = { counter: 20 };
+const loginState = { isLogin: false };
 
-const { increment, decrement } = createActions({
-  INCREMENT: (amount = 1) => ({ amount }),
-  DECREMENT: (amount = 1) => ({ amount: -amount }),
+export const change = createActions({
+  CHANGELOGIN: (todo) => ({ todo }),
 });
-const login = handleActions(
+
+export const login = handleActions(
   {
-    [combineActions(increment, decrement)]: (state: any, actions: any) => {
-      console.log(actions);
-      return { ...state, counter: state.counter + actions.amount };
+    CHANGELOGIN: (state: any, action: any) => {
+      return Object.assign({}, state, { isLogin: action.text });
     },
   },
-  defaultState
+  loginState
 );
-
-export default login;

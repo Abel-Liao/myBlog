@@ -10,10 +10,10 @@ module.exports = merge(common, {
     contentBase: path.resolve(__dirname, "../public"),
     port: "8080",
     inline: true,
-    historyApiFallback: true // 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
+    historyApiFallback: true, // 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
     // hot: true // 允许热加载
     // historyApiFallback: true,
     // publicPath: "/"
   },
-  plugins: []
+  plugins: [],
 });

@@ -9,6 +9,8 @@ import regex from "../../helper/regex";
 import UserNamePage from "./userNamePage";
 import DynamicPage from "./dynamicPage";
 
+import { connect } from "react-redux";
+
 import "./css/index.less";
 
 const Login: FunctionComponent = (props: any) => {
@@ -100,8 +102,8 @@ const Login: FunctionComponent = (props: any) => {
         setIsError(false);
       }
     }
-    window.sessionStorage.setItem("isLogin", "true");
-    props.history.push("/");
+    props.changeLogin(true);
+    props.history.push("/index");
   };
   return (
     <div className="myBlog-login">
@@ -172,4 +174,19 @@ const Login: FunctionComponent = (props: any) => {
     </div>
   );
 };
-export default Login;
+
+function mapStateToProps(state: any) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    // 改变登录状态
+    changeLogin: (status: boolean) => {
+      sessionStorage.setItem("isLogin", "true");
+      dispatch({ type: "CHANGELOGIN", text: status });
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -7,6 +7,10 @@ import {
 } from "react-router-dom";
 import Loadable from "@loadable/component";
 
+import { connect } from "react-redux";
+
+import Store from "./store";
+
 const Index = Loadable(() => import("./component/index"));
 const Login = Loadable(() => import("./component/login"));
 const Register = Loadable(() => import("./component/register"));
@@ -14,7 +18,7 @@ const Register = Loadable(() => import("./component/register"));
 const notLoginRouter = [
   {
     component: [Login],
-    path: "/login",
+    path: "/",
   },
   {
     component: [Register],
@@ -24,14 +28,16 @@ const notLoginRouter = [
 const loginRouter = [
   {
     component: [Index],
-    path: "/",
+    path: "/index",
   },
 ];
 interface RouterArr {
   [index: string]: any;
 }
 function routerFun(routersArr: RouterArr, needLogin: Boolean = true): any {
-  const isLogin = sessionStorage.getItem("isLogin");
+  const loginData: any = Store.getState().login;
+  const isLogin: Boolean =
+    JSON.parse(sessionStorage.getItem("isLogin")) || loginData.isLogin;
   return routersArr.map((route: any) => (
     <Route
       exact={route.path === "/" ? true : false}
@@ -44,7 +50,7 @@ function routerFun(routersArr: RouterArr, needLogin: Boolean = true): any {
               <Redirect
                 key={`login-${route.Routecom}`}
                 to={{
-                  pathname: "/login",
+                  pathname: "/",
                   state: { from: props.location },
                 }}
               />
@@ -59,12 +65,19 @@ function routerFun(routersArr: RouterArr, needLogin: Boolean = true): any {
 }
 function MyBlogRoter() {
   return (
-    <Router>
-      <Switch>
-        {routerFun(loginRouter)}
-        {routerFun(notLoginRouter, false)}
-      </Switch>
-    </Router>
+    <React.Fragment>
+      <Router>
+        <Switch>
+          {routerFun(loginRouter)}
+          {routerFun(notLoginRouter, false)}
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
 }
-export default MyBlogRoter;
+
+function mapStateToProps(state: any) {
+  return state.login;
+}
+
+export default connect(mapStateToProps)(MyBlogRoter);

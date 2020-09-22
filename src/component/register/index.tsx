@@ -2,7 +2,7 @@ import React, {
   useState,
   useEffect,
   FunctionComponent,
-  useCallback
+  useCallback,
 } from "react";
 import { Link } from "react-router-dom";
 import regex from "../../helper/regex";
@@ -18,7 +18,7 @@ const Register: FunctionComponent = (props: any) => {
     password: "密码必须是大小写字母/数字/特殊符号的8-16位组合",
     confirm: "请确认密码",
     email: "请输入正确的邮箱地址",
-    dynamic: "请输入邮件里的4位动态数字"
+    dynamic: "请输入邮件里的4位动态数字",
   };
   /**
    * 用户信息列表
@@ -28,7 +28,7 @@ const Register: FunctionComponent = (props: any) => {
     "password",
     "confirm",
     "email",
-    "dynamic"
+    "dynamic",
   ];
   /**
    * 用户信息列表文字
@@ -38,7 +38,7 @@ const Register: FunctionComponent = (props: any) => {
     password: "用户密码",
     confirm: "确认密码",
     email: "邮箱",
-    dynamic: "邮箱验证码"
+    dynamic: "邮箱验证码",
   };
   /**
    * 用户登录信息
@@ -48,7 +48,7 @@ const Register: FunctionComponent = (props: any) => {
     password: "",
     confirm: "",
     email: "",
-    dynamic: ""
+    dynamic: "",
   });
   /**
    * 用户登录输入错误监听
@@ -58,7 +58,7 @@ const Register: FunctionComponent = (props: any) => {
     password: false,
     confirm: false,
     email: false,
-    dynamic: false
+    dynamic: false,
   });
   /**
    * 用户登录输入错误提示信息
@@ -68,7 +68,7 @@ const Register: FunctionComponent = (props: any) => {
     password: descriptionText.password,
     confirm: descriptionText.confirm,
     email: descriptionText.email,
-    dynamic: descriptionText.dynamic
+    dynamic: descriptionText.dynamic,
   });
   const changeFun = (name: string, isTrue: boolean, text: string) => {
     setIsError({ ...isError, [name]: isTrue });
@@ -100,12 +100,12 @@ const Register: FunctionComponent = (props: any) => {
    * input value绑定
    */
   const infoFun = useCallback(
-    enent => {
+    (enent) => {
       const { name, value }: any = event.target;
       isLegitimateFun(name, value);
       setUserInfo({
         ...userInfo,
-        [name]: value
+        [name]: value,
       });
     },
     [userInfo]
@@ -119,7 +119,7 @@ const Register: FunctionComponent = (props: any) => {
     isLegitimateFun(name, "");
     setUserInfo({
       ...userInfo,
-      [name]: ""
+      [name]: "",
     });
   };
   /**
@@ -137,7 +137,7 @@ const Register: FunctionComponent = (props: any) => {
     <div className="myBlog-register">
       <div className="myBlog-register-content">
         <form className="myBlog-register-form" autoComplete="off">
-          {inputList.map(item => {
+          {inputList.map((item) => {
             return (
               <label htmlFor={item} key={item}>
                 <input
@@ -159,9 +159,7 @@ const Register: FunctionComponent = (props: any) => {
                   >
                     x
                   </span>
-                ) : (
-                  undefined
-                )}
+                ) : undefined}
                 <p className="error-text">
                   {isError[item] ? errorText[item] : ""}
                 </p>
@@ -176,7 +174,7 @@ const Register: FunctionComponent = (props: any) => {
           />
         </form>
         <div className="myBlog-register-bottom">
-          <Link to="/login">去登录</Link>
+          <Link to="/">去登录</Link>
         </div>
       </div>
     </div>

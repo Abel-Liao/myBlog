@@ -28,8 +28,8 @@ const crashReporter = (store: { getState: () => any }) => (
     Raven.captureException(err, {
       extra: {
         action,
-        state: store.getState()
-      }
+        state: store.getState(),
+      },
     });
     throw err;
   }
