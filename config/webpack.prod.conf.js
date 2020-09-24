@@ -17,8 +17,8 @@ module.exports = merge(common, {
       disable: process.env.NODE_ENV !== "production", // Disable during development
       minFileSize: 10240,
       pngquant: {
-        quality: "95-100"
-      }
+        quality: "95-100",
+      },
     }),
     // 压缩CSS代码
     new OptimizeCssAssetsPlugin(),
@@ -26,14 +26,14 @@ module.exports = merge(common, {
     new UglifyJsPlugin({
       cache: true,
       parallel: true,
-      sourceMap: true
+      sourceMap: true,
     }),
     // sourceMap
     new webpack.SourceMapDevToolPlugin({
       filename: "[file].map",
       moduleFilenameTemplate: "[resource-path]",
-      append: "\n//# sourceMappingURL=http://127.0.0.1:8080/dist/[url]"
-    })
+      append: "\n//# sourceMappingURL=http://127.0.0.1:8080/dist/[url]",
+    }),
   ],
   // 提取公用代码
   optimization: {
@@ -49,10 +49,10 @@ module.exports = merge(common, {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "./js/common",
-          chunks: "all"
-        }
-      }
-    }
-  }
+          name: "./common/common",
+          chunks: "all",
+        },
+      },
+    },
+  },
 });
