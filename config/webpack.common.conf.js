@@ -1,15 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV === "development";
+
 module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "[name].[hash].js",
     path: path.resolve(__dirname, "../dist"),
-    chunkFilename: "dist/[name].[hash].chunk.js"
+    chunkFilename: "dist/[name].[hash].chunk.js",
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".json", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".json", ".js", ".jsx"],
   },
   module: {
     rules: [
@@ -18,8 +20,8 @@ module.exports = {
         test: /\.(jsx|js|ts|tsx)$/,
         exclude: /(node_modules)/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.css$/,
@@ -27,16 +29,19 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../"
-            }
+              publicPath: "../",
+            },
+          },
+          // {
+          //   loader: "style-loader", // MiniCssExtractPlugin 于此冲突
+          // },
+          {
+            loader: "css-loader",
           },
           {
-            loader: "style-loader"
+            loader: "postcss-loader",
           },
-          {
-            loader: "css-loader"
-          }
-        ]
+        ],
       },
       {
         test: /\.less$/,
@@ -44,19 +49,24 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../"
-            }
+              publicPath: "../",
+              hmr: devMode,
+              reloadAll: true,
+            },
           },
           // {
-          //   loader: "style-loader" // creates style nodes from JS strings
+          //   loader: "style-loader", // creates style nodes from JS strings
           // },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
           },
           {
-            loader: "less-loader" // compiles Less to CSS
-          }
-        ]
+            loader: "postcss-loader",
+          },
+          {
+            loader: "less-loader", // compiles Less to CSS
+          },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|bmp|jfif)$/,
@@ -66,12 +76,12 @@ module.exports = {
             options: {
               name: "[name].[hash:8].[ext]",
               outputPath: "images",
-              limit: 8192
-            }
-          }
-        ]
-      }
-    ]
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -80,12 +90,12 @@ module.exports = {
       template: path.resolve(__dirname, "../public/index.html"),
       minify: {
         // 压缩选项
-        collapseWhitespace: true
-      }
+        collapseWhitespace: true,
+      },
     }),
     // 分离css
     new MiniCssExtractPlugin({
-      filename: "./css/[name].[hash].css"
-    })
-  ]
+      filename: devMode ? "./css/[name].css" : "./css/[name].[hash].css",
+    }),
+  ],
 };
