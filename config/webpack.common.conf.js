@@ -29,6 +29,8 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
+              hmr: devMode,
+              reloadAll: true,
               publicPath: "../",
             },
           },
@@ -49,9 +51,9 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../",
               hmr: devMode,
               reloadAll: true,
+              publicPath: "../",
             },
           },
           // {
@@ -96,6 +98,7 @@ module.exports = {
     // 分离css
     new MiniCssExtractPlugin({
       filename: devMode ? "./css/[name].css" : "./css/[name].[hash].css",
+      chunkFilename: devMode ? "./css/[id].css" : "./css/[id].[hash].css",
     }),
   ],
 };

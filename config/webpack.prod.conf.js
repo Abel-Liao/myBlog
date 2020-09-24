@@ -49,7 +49,7 @@ module.exports = merge(common, {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "./common/common",
+          name: "./public/common",
           chunks: "all",
         },
       },
