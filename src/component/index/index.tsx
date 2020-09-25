@@ -23,24 +23,31 @@ function Index(props: any) {
   return (
     <div className="myBlog-index-main">
       <div className="myBlog-index-header">
-        <img src={userNameImg} alt="user0image" />
-        <div className="myBlog-index-choose">
-          <span>{current}</span>
-          <ul className="index-choose-ul">
-            {animationList.map((animation) => {
-              return (
-                <li
-                  className={`index-choose-li ${animation} ${
-                    current === animation ? "choose-animation" : ""
-                  }`}
-                  onClick={() => useCurrent(animation)}
-                  key={animation}
-                >
-                  {animation}
-                </li>
-              );
-            })}
-          </ul>
+        <img
+          className="myBlog-userName-img"
+          src={userNameImg}
+          alt="user0image"
+        />
+        <div className="myBlog-header-information">
+          <span className="myBlog-header-userName">Eble</span>
+          <span className="current-selection-theme">
+            {current}
+            <ul className="index-choose-ul">
+              {animationList.map((animation) => {
+                return (
+                  <li
+                    className={`index-choose-li ${animation} ${
+                      current === animation ? "choose-animation" : ""
+                    }`}
+                    onClick={() => useCurrent(animation)}
+                    key={animation}
+                  >
+                    {animation}
+                  </li>
+                );
+              })}
+            </ul>
+          </span>
         </div>
       </div>
       <Current />

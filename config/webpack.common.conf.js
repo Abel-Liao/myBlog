@@ -26,17 +26,18 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: devMode,
-              reloadAll: true,
-              publicPath: "../",
-            },
-          },
-          // {
-          //   loader: "style-loader", // MiniCssExtractPlugin 于此冲突
-          // },
+          devMode
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  hmr: true,
+                  reloadAll: true,
+                  publicPath: "../",
+                },
+              }
+            : {
+                loader: "style-loader", // creates style nodes from JS strings
+              },
           {
             loader: "css-loader",
           },
@@ -48,17 +49,18 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: devMode,
-              reloadAll: true,
-              publicPath: "../",
-            },
-          },
-          // {
-          //   loader: "style-loader", // creates style nodes from JS strings
-          // },
+          devMode
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  hmr: true,
+                  reloadAll: true,
+                  publicPath: "../",
+                },
+              }
+            : {
+                loader: "style-loader", // creates style nodes from JS strings
+              },
           {
             loader: "css-loader", // translates CSS into CommonJS
           },

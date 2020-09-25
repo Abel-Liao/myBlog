@@ -1,18 +1,119 @@
+@headerHeight: 50px;
+@headerMargin: 5px;
+/* Header */
+@themeWidth: 50px;
+.myBlog-index-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #ccc;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.myBlog-userName-img {
+  width: @headerHeight;
+  height: @headerHeight;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: @headerMargin;
+  vertical-align: middle;
+}
+.myBlog-header-information {
+  display: inline-block;
+  position: absolute;
+  height: 100%;
+  line-height: @headerHeight + @headerMargin * 2;
+  margin-left: 10px;
+  text-align: center;
+}
+.current-selection-theme {
+  display: inline-block;
+  min-width: @themeWidth;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.index-choose-ul {
+  position: absolute;
+  top: @headerHeight + @headerMargin * 2;
+  left: 0;
+  min-width: @themeWidth;
+  overflow: hidden;
+  display: none;
+}
+// 选择主题时过渡动画
+@timer: 0.5s; /* 动画完成一个周期所花费时间 */
+@themeList: Tree, Book, Road, Galaxy;
+@liHeight: 30px; /*主题列表元素高度*/
+@liMagin: 10px; /*主题列表元素边距*/
+@ulHeight: @liHeight * length(@themeList) + @liMagin * (length(@themeList) - 1); /*主题列表高度*/
+.current-selection-theme {
+  &:hover .index-choose-ul {
+    display: block;
+    height: @ulHeight + 150px;
+  }
+}
+.index-choose-ul {
+  height: @ulHeight;
+  animation-name: ulAnimation;
+  animation-timing-function: ease-in;
+  animation-duration: 0.1s;
+  animation-delay: (length(@themeList) - 1) * 0.5s;
+  animation-iteration-count: 1;
+  &:hover {
+    display: block;
+    height: @ulHeight;
+  }
+}
+@keyframes ulAnimation {
+  0% {
+    height: @ulHeight + 150px;
+  }
+  100% {
+    height: @ulHeight;
+  }
+}
+.index-choose-li {
+  margin-bottom: @liMagin;
+  line-height: @liHeight;
+  cursor: pointer;
+  animation-timing-function: ease-in; /* 动画的速度曲线 */
+  animation-duration: @timer; /* 动画完成一个周期所花费时间 */
+  animation-iteration-count: 1; /* 动画被播放的次数 */
+  // animation-direction: alternate-reverse; /* 动画是否在下一周期逆向地播放 */
+  animation-fill-mode: both; /* 动画完成后保存位置 */
+  // animation-play-state: running; /* 动画是否正在运行或暂停 */
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    color: #f00;
+  }
+}
+.loop(@list,@index:1) when (@index =< length(@list)) {
+  @item: extract(@list, @index);
+  .@{item} {
+    animation-name: @item; /* @keyframes 动画的名称 */
+    animation-delay: (@index - 1s)/2; /* 动画何时开始 */
+  }
+  @keyframes @item {
+    0% {
+      transform: translateY(@ulHeight + 150px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .loop(@list, (@index + 1));
+}
+.loop(@themeList);
+
 /*  公用部分 */
 .myBlog-index-main {
   width: 100%;
   height: 100%;
   position: relative;
-}
-.myBlog-index-header {
-  position: absolute;
-  left: 0;
-  top: 0;
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
 }
 .myBlog-animation-main {
   width: 100%;
@@ -20,11 +121,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-}
-
-/* Header */
-.myBlog-index-header {
-  color: #ff0;
+  padding-top: @headerHeight + @headerMargin * 2 + 10px;
 }
 
 // 子页面
