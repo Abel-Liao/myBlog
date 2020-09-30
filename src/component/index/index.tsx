@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import PopUps from "../popUps";
+import MouseAnimation from "../mouseAnimation";
 
 import Book from "./book";
 import Tree from "./tree";
@@ -18,13 +19,21 @@ const animation: any = {
   Galaxy: Galaxy,
 };
 
-function Index(props: any) {
-  const animationList = ["Tree", "Book", "Road", "Galaxy"];
+function Index(props: any): JSX.Element {
+  const childRef: any = useRef(null);
+  const animationList: Array<string> = ["Tree", "Book", "Road", "Galaxy"];
   const [current, useCurrent] = useState("Book");
   const Current = animation[current];
 
+  const handleOnMouseUp: any = (event: any) => {
+    childRef.current.handleOnMouseUp(event);
+  };
+
   return (
-    <div className="myBlog-index-main">
+    <div
+      className="myBlog-index-main"
+      onMouseUp={(event) => handleOnMouseUp(event)}
+    >
       <div className="myBlog-index-header">
         <img
           className="myBlog-userName-img"
@@ -55,6 +64,7 @@ function Index(props: any) {
       </div>
       <Current />
       <PopUps {...props} />
+      <MouseAnimation {...props} refName={childRef} />
     </div>
   );
 }

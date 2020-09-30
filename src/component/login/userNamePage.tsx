@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-const userNamePage = (props: any) => {
+const userNamePage: FunctionComponent = (props: any) => {
   const { password, clearTextFun } = props;
   return (
     <label htmlFor="password">

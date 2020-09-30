@@ -1,0 +1,30 @@
+.myBlog-mouseAnimation-main {
+  position: fixed;
+  border-radius: 50%;
+  background-color: #f00;
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+  animation-name: mouseAnimation;
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+}
+@keyframes mouseAnimation {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  98% {
+    width: 15px;
+    height: 15px;
+    opacity: 0.1;
+  }
+  100% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+}
