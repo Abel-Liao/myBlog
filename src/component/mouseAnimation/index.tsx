@@ -4,24 +4,18 @@ import "./css/index.less";
 
 function MouseAnimation(props: any): JSX.Element {
   const timer: any = useRef();
-  const [mouseAnimation, useMouseAnimation] = useState([]);
-  const [mousePosition, useMousePosition] = useState({ left: 0, top: 0 });
+  const [mousePosition, useMousePosition] = useState([]);
 
   useImperativeHandle(props.refName, () => ({
     handleOnMouseUp: (event: any) => {
       if (event.button === 0) {
-        const data: Array<boolean> = [...mouseAnimation];
-        data.push(true);
-        useMouseAnimation(data);
-        useMousePosition({
-          ...mousePosition,
-          left: event.clientX,
-          top: event.clientY,
-        });
+        const positionData: Array<any> = [...mousePosition];
+        positionData.push({ left: event.clientX, top: event.clientY });
+        useMousePosition(positionData);
         timer.current = setTimeout(() => {
-          const data: Array<boolean> = [...mouseAnimation];
-          data.shift();
-          useMouseAnimation(data);
+          const timerPositionData: Array<boolean> = [...positionData];
+          timerPositionData.shift();
+          useMousePosition(timerPositionData);
         }, 300);
       }
     },
@@ -33,15 +27,15 @@ function MouseAnimation(props: any): JSX.Element {
     };
   }, []);
 
-  return mouseAnimation.length > 0 ? (
+  return mousePosition.length > 0 ? (
     <>
-      {mouseAnimation.map((data: boolean, index: number) => {
+      {mousePosition.map((data: boolean, index: number) => {
         return data ? (
           <div
             className="myBlog-mouseAnimation-main"
             style={{
-              top: mousePosition.top,
-              left: mousePosition.left,
+              top: mousePosition[index].top,
+              left: mousePosition[index].left,
             }}
             key={`mouse-${index}`}
           />
