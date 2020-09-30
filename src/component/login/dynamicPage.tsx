@@ -12,19 +12,28 @@ const DynamicPage: FunctionComponent = (props: any) => {
   const [countdown, setCountdown] = useState(number);
   // 倒计时方法
   const isTextFun = () => {
-    setIsText(isText => false);
+    setIsText((isText) => false);
     timerFun.current = setInterval(() => {
-      setCountdown(countdown => countdown - 1);
+      setCountdown((countdown) => countdown - 1);
     }, 1000);
   };
   // 清除定时器
   useEffect(() => {
     if (countdown < 0) {
       clearInterval(timerFun.current);
-      setIsText(isText => true);
-      setCountdown(countdown => number);
+      setIsText((isText) => true);
+      setCountdown((countdown) => number);
     }
   }, [countdown]);
+  // 卸载组件时清除定时器
+  useEffect(() => {
+    return () => {
+      clearInterval(timerFun.current);
+      setIsText((isText) => true);
+      setCountdown((countdown) => number);
+    };
+  }, []);
+
   return (
     <label htmlFor="dynamic" className="myBlog-login-dynamic">
       <input
@@ -48,9 +57,7 @@ const DynamicPage: FunctionComponent = (props: any) => {
         >
           x
         </span>
-      ) : (
-        undefined
-      )}
+      ) : undefined}
     </label>
   );
 };

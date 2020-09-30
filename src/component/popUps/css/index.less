@@ -1,14 +1,51 @@
-.myBlog-popUps-main {
-  position: absolute;
+.myBlog-popUps-page {
+  position: fixed;
   right: 0;
   bottom: 0;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end;
+}
+.myBlog-popUps-main {
+  display: inline-block;
+  width: fit-content;
   padding: 10px;
+  margin-top: 10px;
   background: rgba(255, 255, 255, 1);
   border-radius: 8px;
   color: #666;
   transition: all ease-in-out 0.2s;
+  position: relative;
+  top: 0;
+  overflow: hidden;
   &:last-child {
     margin-top: 0;
+  }
+}
+.popUps-enter {
+  animation-name: popUps;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+}
+@keyframes popUps {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
+  }
+}
+.popUps-closed {
+  animation-name: popUpsClosed;
+  animation-timing-function: ease-in;
+  animation-duration: 0.3s;
+}
+@keyframes popUpsClosed {
+  100% {
+    display: none;
+    height: 0;
   }
 }
 .myBlog-popUps-close {

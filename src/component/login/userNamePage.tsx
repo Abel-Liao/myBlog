@@ -19,9 +19,7 @@ const userNamePage = (props: any) => {
         >
           x
         </span>
-      ) : (
-        undefined
-      )}
+      ) : undefined}
     </label>
   );
 };
