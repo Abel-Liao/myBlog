@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, FunctionComponent } from "react";
 import "./css/index.less";
 
 const PopUps: FunctionComponent = (props: any) => {
-  const popUpsEle = useRef([]);
+  const popUpsEle: any = useRef([]);
   const timer: any = useRef();
   const [popUpsDisplay, usePopUpsDisplay] = useState(false);
   const [popUpsEleDisplay, usePopUpsEleDisplay] = useState([]);
@@ -48,7 +48,7 @@ const PopUps: FunctionComponent = (props: any) => {
       const data = [].concat(popUpsEleDisplay);
       const spliceData = data.splice(index, 1, false);
       usePopUpsEleDisplay(data);
-    }, 280);
+    }, 80);
     const data = [].concat(popUpsEleAnimation);
     const spliceData = data.splice(index, 1, false);
     usePopUpsEleAnimation(data);

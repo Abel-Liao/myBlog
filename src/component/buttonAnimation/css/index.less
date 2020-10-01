@@ -1,0 +1,30 @@
+.myBlog-buttonAnimation-main {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.myBlog-buttonAnimation-maskLayer {
+  background: rgba(255, 255, 255, 1);
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
+  animation-name: buttonAnimation;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+}
+
+@keyframes buttonAnimation {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  20% {
+    width: 30px;
+    height: 30px;
+  }
+  100% {
+    width: 700px;
+    height: 100px;
+  }
+}

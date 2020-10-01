@@ -1,6 +1,7 @@
 import React, {
   useState,
   useEffect,
+  useRef,
   FunctionComponent,
   useCallback,
 } from "react";
@@ -11,9 +12,14 @@ import DynamicPage from "./dynamicPage";
 
 import { connect } from "react-redux";
 
+import ButtonAnimation from "../buttonAnimation";
+
 import "./css/index.less";
 
 const Login: FunctionComponent = (props: any) => {
+  const buttonRefs: { [k: string]: any } = useRef({});
+  const clickRefs: { [k: string]: any } = useRef({});
+
   /**
    * 登录方式列表
    */
@@ -79,10 +85,14 @@ const Login: FunctionComponent = (props: any) => {
       [name]: "",
     });
   };
+
   /**
    * 登录按钮触发事件
    */
-  const loginFun = () => {
+  const loginFun = (event: any) => {
+    if (buttonRefs.current.login) {
+      buttonRefs.current.login.buttonFun(event, "login");
+    }
     const errorText: any = {
       userName: "用户名不能为空",
       password: "密码不能为空",
@@ -105,21 +115,42 @@ const Login: FunctionComponent = (props: any) => {
     props.changeLogin(true);
     props.history.push("/index");
   };
+
   return (
     <div className="myBlog-login">
       <div className="myBlog-login-content">
         <ul className="myBlog-login-ul">
-          {chooseList.map((item: any) => {
+          {chooseList.map((item: any, index: number) => {
             return (
-              <li
-                className={`myBlog-login-li ${
-                  types === item.name ? "login-choose" : ""
-                }`}
-                onClick={() => setDynamic(item.name)}
+              <ButtonAnimation
+                {...props}
                 key={item.name}
+                refName={(el: any) => {
+                  const data: any = { ...buttonRefs.current };
+                  data[item.name] = el;
+                  return (buttonRefs.current = data);
+                }}
+                clickRefs={clickRefs.current}
               >
-                {item.text}
-              </li>
+                <li
+                  className={`myBlog-login-li ${
+                    types === item.name ? "login-choose" : ""
+                  }`}
+                  onClick={() => {
+                    setDynamic(item.name);
+                    if (buttonRefs.current[item.name]) {
+                      buttonRefs.current[item.name].buttonFun(event, item.name);
+                    }
+                  }}
+                  ref={(el: any) => {
+                    const data: any = { ...clickRefs.current };
+                    data[item.name] = el;
+                    return (clickRefs.current = data);
+                  }}
+                >
+                  {item.text}
+                </li>
+              </ButtonAnimation>
             );
           })}
         </ul>
@@ -160,12 +191,27 @@ const Login: FunctionComponent = (props: any) => {
               clearTextFun={clearTextFun}
             />
           )}
-          <input
-            type="button"
-            className="myBlog-login-button"
-            onClick={() => loginFun()}
-            value="登录"
-          />
+          <ButtonAnimation
+            {...props}
+            refName={(el: any) => {
+              const data: any = { ...buttonRefs.current };
+              data.login = el;
+              return (buttonRefs.current = data);
+            }}
+            clickRefs={clickRefs.current}
+          >
+            <input
+              type="button"
+              className="myBlog-login-button"
+              onClick={(event) => loginFun(event)}
+              value="登录"
+              ref={(el: any) => {
+                const data: any = { ...clickRefs.current };
+                data.login = el;
+                return (clickRefs.current = data);
+              }}
+            />
+          </ButtonAnimation>
         </form>
         <div className="myBlog-login-bottom">
           <Link to="/register">注册</Link>
