@@ -1,15 +1,21 @@
 import React, {
   useState,
   useEffect,
+  useRef,
   FunctionComponent,
   useCallback,
 } from "react";
 import { Link } from "react-router-dom";
 import regex from "../../helper/regex";
 
+import ButtonAnimation from "../buttonAnimation";
+
 import "./css/index.less";
 
 const Register: FunctionComponent = (props: any) => {
+  let buttonRefs: { [k: string]: any } = useRef({});
+  let clickRefs: { [k: string]: any } = useRef({});
+
   /**
    * 错误提示信息
    */
@@ -126,6 +132,9 @@ const Register: FunctionComponent = (props: any) => {
    * 登录按钮触发事件
    */
   const registerFun = () => {
+    if (buttonRefs.current.register) {
+      buttonRefs.current.register.buttonFun(event, "register");
+    }
     for (let key in userInfo) {
       if (isLegitimateFun(key, userInfo[key])) {
         return;
@@ -133,6 +142,7 @@ const Register: FunctionComponent = (props: any) => {
     }
     console.log(userInfo);
   };
+
   return (
     <div className="myBlog-register">
       <div className="myBlog-register-content">
@@ -166,12 +176,19 @@ const Register: FunctionComponent = (props: any) => {
               </label>
             );
           })}
-          <input
-            type="button"
-            className="myBlog-register-button"
-            onClick={() => registerFun()}
-            value="注册"
-          />
+          <ButtonAnimation
+            {...props}
+            refName={(el: any) => (buttonRefs.current.register = el)}
+            clickRefs={clickRefs.current}
+          >
+            <input
+              type="button"
+              className="myBlog-register-button"
+              onClick={() => registerFun()}
+              value="注册"
+              ref={(el: any) => (clickRefs.current.register = el)}
+            />
+          </ButtonAnimation>
         </form>
         <div className="myBlog-register-bottom">
           <Link to="/">去登录</Link>

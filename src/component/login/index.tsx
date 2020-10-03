@@ -142,11 +142,7 @@ const Login: FunctionComponent = (props: any) => {
                       buttonRefs.current[item.name].buttonFun(event, item.name);
                     }
                   }}
-                  ref={(el: any) => {
-                    const data: any = { ...clickRefs.current };
-                    data[item.name] = el;
-                    return (clickRefs.current = data);
-                  }}
+                  ref={(el: any) => (clickRefs.current[item.name] = el)}
                 >
                   {item.text}
                 </li>
@@ -205,11 +201,7 @@ const Login: FunctionComponent = (props: any) => {
               className="myBlog-login-button"
               onClick={(event) => loginFun(event)}
               value="登录"
-              ref={(el: any) => {
-                const data: any = { ...clickRefs.current };
-                data.login = el;
-                return (clickRefs.current = data);
-              }}
+              ref={(el: any) => (clickRefs.current.login = el)}
             />
           </ButtonAnimation>
         </form>
