@@ -1,10 +1,12 @@
 @blackColor: rgba(0, 0, 0, 0.3); //全局背景色
 @red: rgba(229, 26, 72, 0.8); //按钮背景色
 @redHover: rgba(229, 26, 72, 1); //按钮Hover背景色
+@gray: rgba(221, 221, 221, 1); //倒计时背景色
 @thirty: 30px;
 @five: 5px;
 @twoHundred: 250px;
 @colorFFF: #fff;
+@color666: #666;
 
 .myBlog-login {
   width: 100%;
@@ -56,7 +58,7 @@
   width: 15px;
   height: 15px;
   line-height: 12px;
-  background: #ddd;
+  background: @gray;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -71,17 +73,23 @@
   }
 }
 .myBlog-dynamic-text {
-  cursor: pointer;
   float: right;
   width: 40%;
   text-align: center;
   height: @thirty;
   line-height: @thirty;
-  background-color: @red;
   border-radius: @five;
+}
+.text {
+  cursor: pointer;
+  background-color: @red;
   &:hover {
     background-color: @redHover;
   }
+}
+.number {
+  background: @gray;
+  color: @color666;
 }
 .myBlog-login-ul {
   display: flex;

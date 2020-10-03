@@ -45,7 +45,7 @@ const DynamicPage: FunctionComponent = (props: any) => {
         onChange={props.infoFun}
       />
       <span
-        className="myBlog-dynamic-text"
+        className={`myBlog-dynamic-text ${isText ? "text" : "number"}`}
         onClick={isText ? isTextFun : undefined}
       >
         {isText ? "获取动态密码" : countdown}
